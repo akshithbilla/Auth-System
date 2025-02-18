@@ -1,21 +1,4 @@
 # Node modules
 node_modules/
 
-# Environment variables
-.env
 
-# Logs
-logs/
-*.log
-npm-debug.log*
-
-# Build directories
-frontend/build/
-frontend/dist/
-
-# VSCode settings
-.vscode/
-
-# System files
-.DS_Store
-Thumbs.db
