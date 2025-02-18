@@ -1,9 +1,8 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = import.meta.env.MODE === "development"
-  ? "https://auth-system-p8ow.onrender.com/api/auth"
-  : "https://auth-system-p8ow.onrender.com/api/auth"; // Use the correct backend URL for production
+const API_URL =  "https://auth-system-p8ow.onrender.com/api/auth"
+ 
 
 axios.defaults.withCredentials = true;
 
