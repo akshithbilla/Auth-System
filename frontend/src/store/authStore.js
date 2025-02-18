@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL =  "https://auth-system-p8ow.onrender.com/"
+const API_URL =  "https://auth-system-p8ow.onrender.com/api/auth/check-auth"
  
 
 axios.defaults.withCredentials = true;
