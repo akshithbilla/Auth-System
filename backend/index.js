@@ -18,7 +18,7 @@ const __dirname = path.resolve();
 const corsOptions = {
   origin: [
     "http://localhost:5173", // Local frontend URL
-    "https://auth-system-flame-two.vercel.app", // Production frontend URL
+    "https://auth-system-p8ow.onrender.com/api/auth/check-auth", // Production frontend URL
   ],
   credentials: true,
 };
