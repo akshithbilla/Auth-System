@@ -14,25 +14,37 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// Set up CORS with dynamic origins for development and production
+const corsOptions = {
+  origin: [
+    "http://localhost:5173", // Local frontend URL
+    "https://auth-system-flame-two.vercel.app", // Production frontend URL
+  ],
+  credentials: true,
+};
 
-app.use(express.json()); // allows us to parse incoming requests:req.body
-app.use(cookieParser()); // allows us to parse incoming cookies
+app.use(cors(corsOptions));
+
+app.use(express.json()); // Parse incoming requests' body
+app.use(cookieParser()); // Parse incoming cookies
+
 app.get("/", (req, res) => {  
-    res.send("Server running");  
+  res.send("Server running");  
 });
 
+// Authentication routes
 app.use("/api/auth", authRoutes);
 
+// Serve frontend in production if built
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-	});
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
 }
 
 app.listen(PORT, () => {
-	connectDB();
-	console.log("Server is running on port: ", PORT);
+  connectDB();
+  console.log("Server is running on port: ", PORT);
 });
