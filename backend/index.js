@@ -16,12 +16,10 @@ const __dirname = path.resolve();
 
 // Set up CORS with dynamic origins for development and production
 const corsOptions = {
-  origin: [
-    "http://localhost:5173", // Local frontend URL
-    "https://auth-system-p8ow.onrender.com/api/auth/check-auth", // Production frontend URL
-  ],
-  credentials: true,
+  origin: "http://localhost:5173", // Ensure this matches your frontend URL
+  credentials: true, // Allow cookies to be sent
 };
+
 
 app.use(cors(corsOptions));
 

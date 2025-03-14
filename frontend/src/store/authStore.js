@@ -1,8 +1,8 @@
+import React from "react";
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL =  "https://auth-system-p8ow.onrender.com/api/auth/check-auth"
- 
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth";
 
 axios.defaults.withCredentials = true;
 
@@ -64,12 +64,17 @@ export const useAuthStore = create((set) => ({
 	checkAuth: async () => {
 		set({ isCheckingAuth: true, error: null });
 		try {
-			const response = await axios.get(`${API_URL}/check-auth`);
+			const response = await axios.get(`${API_URL}/check-auth`, {
+				withCredentials: true, // Ensure cookies are sent
+			});
+	
 			set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
 		} catch (error) {
 			set({ error: null, isCheckingAuth: false, isAuthenticated: false });
 		}
 	},
+	
+	
 	forgotPassword: async (email) => {
 		set({ isLoading: true, error: null });
 		try {
